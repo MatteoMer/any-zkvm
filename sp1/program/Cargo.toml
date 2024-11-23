@@ -1,0 +1,8 @@
+[package]
+version = "0.1.0"
+name = "sp1-program"
+edition = "2021"
+
+[dependencies]
+sp1-zkvm = "3.0.0-rc4"
+lib = { workspace = true, features = ['sp1'] }

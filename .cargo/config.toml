@@ -1,0 +1,9 @@
+[profile.release.package.risczero]
+inherits = "risczero"
+
+[profile.release.package.sp1]
+inherits = "sp1"
+
+[profile.release.package.jolt]
+inherits = "jolt"
+

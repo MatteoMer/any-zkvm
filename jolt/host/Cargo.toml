@@ -1,0 +1,10 @@
+[package]
+name = "jolt"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+jolt = { package = "jolt-sdk", git = "https://github.com/a16z/jolt", features = ["host"] }
+guest = { path = "../guest" }
+lib = { workspace = true }
+

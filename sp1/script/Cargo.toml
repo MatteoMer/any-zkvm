@@ -1,0 +1,22 @@
+[package]
+version = "0.1.0"
+name = "sp1"
+edition = "2021"
+default-run = "sp1"
+
+[[bin]]
+name = "sp1"
+path = "src/bin/main.rs"
+
+[dependencies]
+sp1-sdk = "3.0.0"
+serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
+serde = { version = "1.0.200", default-features = false, features = ["derive"] }
+clap = { version = "4.0", features = ["derive", "env"] }
+tracing = "0.1.40"
+hex = "0.4.3"
+alloy-sol-types = "0.7.7"
+lib = { workspace = true, features = ['sp1'] }
+
+[build-dependencies]
+sp1-helper = "3.0.0"

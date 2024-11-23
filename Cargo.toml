@@ -1,0 +1,40 @@
+[workspace]
+resolver = "2"
+members = [
+    "lib",
+    # SP1
+    "sp1/program",
+    "sp1/script",
+    # Risc Zero
+    "risczero/host",
+    "risczero/methods",
+    "risczero/methods/guest",
+    # Jolt
+    "jolt/guest",
+    "jolt/host",
+]
+
+[workspace.dependencies]
+lib = { path = "./lib" }
+
+[profile.risczero]
+inherits = "release"
+opt-level = 3
+lto = true
+debug = 1
+
+[profile.sp1]
+inherits = "release"
+
+[profile.jolt]
+inherits = "release"
+debug = 1
+codegen-units = 1
+lto = "fat"
+
+
+# jolt need this, you can delete if you dont plan to use Jolt in your benchmarks
+[patch.crates-io]
+ark-ff = { git = "https://github.com/a16z/arkworks-algebra", branch = "optimize/field-from-u64" }
+ark-ec = { git = "https://github.com/a16z/arkworks-algebra", branch = "optimize/field-from-u64" }
+ark-serialize = { git = "https://github.com/a16z/arkworks-algebra", branch = "optimize/field-from-u64" }

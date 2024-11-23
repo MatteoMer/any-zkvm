@@ -30,3 +30,4 @@ Available zkVM: `[sp1, risczero]`
 - Add more zkVMs
 - Add Valida with their custom ISA
 - Add benchmarks
+- Add an example on how to use a specific zkVM precompile in your program

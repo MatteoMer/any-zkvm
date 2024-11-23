@@ -19,11 +19,11 @@ pub enum ZkvmProcessError {
 */
 pub trait ZkvmProcessor {
     type Output;
-    type Input
+    type Input;
 
-    fn get_guest_inputs() -> Result<u32, ZkvmProcessError>;
-    fn get_host_inputs() -> u32;
-    fn prove(input: u32) -> Result<Self::Output, ZkvmProcessError>;
+    fn get_guest_inputs() -> Result<Self::Input, ZkvmProcessError>;
+    fn get_host_inputs() -> Self::Input;
+    fn prove(input: Self::Input) -> Result<Self::Output, ZkvmProcessError>;
     fn process_outputs(output: Self::Output);
 }
 
@@ -45,8 +45,11 @@ pub trait Sp1ZkvmProcessor {
 pub struct Processor;
 
 impl ZkvmProcessor for Processor {
+    // TODO: change to your desired input/outputs types
     type Output = (u32, u32, u32);
     type Input = u32;
+
+    //
     fn get_guest_inputs() -> Result<u32, ZkvmProcessError> {
         if cfg!(feature = "sp1") {
             #[cfg(feature = "sp1")]
@@ -71,13 +74,13 @@ impl ZkvmProcessor for Processor {
         20
     }
 
-    fn prove(input: u32) -> Result<<Processor as ZkvmProcessor>::Output, ZkvmProcessError> {
+    fn prove(input: Self::Input) -> Result<<Processor as ZkvmProcessor>::Output, ZkvmProcessError> {
         let (a, b) = fibonacci(input);
         Ok((a, b, input))
     }
 
-    fn process_outputs(_output: Self::Output) {
-        todo!()
+    fn process_outputs(output: Self::Output) {
+        println!("[any-zkvm] output: {:?}", output);
     }
 }
 

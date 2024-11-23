@@ -16,14 +16,14 @@ fn main() {
 
     let prover = default_prover();
 
-    println!("[risczero] starting proving");
+    println!("[risczero] Generating proof!");
     let prove_info = prover.prove(env, METHOD_ELF).unwrap();
 
     let receipt = prove_info.receipt;
 
     receipt.verify(METHOD_ID).unwrap();
-    println!("[risczero] proof verified");
+    println!("[risczero] Successfully verified proof!");
 
     let outputs = Processor::process_internal_outputs(&receipt);
-    Processor::process_outputs(&outputs);
+    Processor::process_outputs(outputs);
 }

@@ -1,4 +1,4 @@
-use lib::{Processor, ZkvmProcessor};
+use lib::{Processor, Sp1ZkvmProcessor, ZkvmProcessor};
 use sp1_sdk::{include_elf, ProverClient, SP1Stdin};
 
 pub const FIBONACCI_ELF: &[u8] = include_elf!("sp1-program");
@@ -17,7 +17,7 @@ fn main() {
 
     println!("[sp1] Generating proof!");
     // Generate the proof
-    let proof = client
+    let mut proof = client
         .prove(&pk, stdin)
         .run()
         .expect("failed to generate proof");
@@ -25,4 +25,7 @@ fn main() {
     // Verify the proof.
     client.verify(&proof, &vk).expect("failed to verify proof");
     println!("[sp1] Successfully verified proof!");
+
+    let outputs = Processor::process_internal_outputs(&mut proof.public_values);
+    Processor::process_outputs(outputs);
 }

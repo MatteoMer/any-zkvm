@@ -16,7 +16,7 @@ clap = { version = "4.0", features = ["derive", "env"] }
 tracing = "0.1.40"
 hex = "0.4.3"
 alloy-sol-types = "0.7.7"
-lib = { workspace = true, features = ['sp1'] }
+lib = { workspace = true, features = ['sp1', 'sdk-sp1'] }
 
 [build-dependencies]
 sp1-helper = "3.0.0"

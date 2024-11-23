@@ -12,14 +12,19 @@ You'll find a trait `Processor` with some function already implemented; let's go
 This type represent the public inputs you'll pass to your verifier
 ### Processor::Output
 This type represent the public outputs your program will pass to the verifier
-### get_guest_inputs
+### get_guest_inputs()
 This function is an helper to pass your inputs to the zkvm, you should not have to modify this function (or at least not often)
-### get_host_inputs
+### get_host_inputs()
 This function passes the public inputs to the prover, you could for example take these inputs from your user directyl
-### prove
+### prove(input: Self::Input)
 This is where you'll write the code you want to prove, this code will be the one passed to the prover
-### process_outputs
+### process_outputs(_output: Self::Output)
 This function is the callback you'll get at the end of the program (after verification), you can then uses the output values to do any verification you need!
+
+## Run a specific zkVM
+`cargo run -p [zkVM] --release`
+
+Available zkVM: `[sp1, risczero]`
 
 ## TODO
 - Add more zkVMs

@@ -27,18 +27,24 @@ pub trait ZkvmProcessor {
     fn process_outputs(output: Self::Output);
 }
 
-#[cfg(feature = "risczero")]
-pub trait RiscZeroZkvmProcessor {
-    fn process_internal_outputs(
-        receipt: &risc0_zkvm::Receipt,
-    ) -> <Processor as ZkvmProcessor>::Output;
-}
-
 #[cfg(feature = "sdk-sp1")]
 pub trait Sp1ZkvmProcessor {
     fn process_internal_outputs(
         receipt: &mut sp1_sdk::SP1PublicValues,
     ) -> <Processor as ZkvmProcessor>::Output;
+
+    // for SP1 we can use a pre-compile for this function
+    fn secp256k1_add(p: *mut [u32; 16], q: *mut [u32; 16]);
+}
+
+#[cfg(feature = "risczero")]
+pub trait RiscZeroZkvmProcessor {
+    fn process_internal_outputs(
+        receipt: &risc0_zkvm::Receipt,
+    ) -> <Processor as ZkvmProcessor>::Output;
+
+    // While not using it for risc0
+    fn secp256k1_add(p: *mut [u32; 16], q: *mut [u32; 16]);
 }
 
 #[derive(Debug)]
@@ -94,6 +100,10 @@ impl RiscZeroZkvmProcessor for Processor {
             .decode::<<Processor as ZkvmProcessor>::Output>()
             .expect("[risc0] cannot decode journal")
     }
+
+    fn secp256k1_add(_p: *mut [u32; 16], _q: *mut [u32; 16]) {
+        todo!()
+    }
 }
 
 #[cfg(feature = "sdk-sp1")]
@@ -102,5 +112,9 @@ impl Sp1ZkvmProcessor for Processor {
         public_values: &mut sp1_sdk::SP1PublicValues,
     ) -> <Processor as ZkvmProcessor>::Output {
         public_values.read::<<Processor as ZkvmProcessor>::Output>()
+    }
+
+    fn secp256k1_add(p: *mut [u32; 16], q: *mut [u32; 16]) {
+        sp1_zkvm::syscalls::syscall_secp256k1_add(p, q)
     }
 }

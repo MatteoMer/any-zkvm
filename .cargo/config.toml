@@ -4,6 +4,5 @@ inherits = "risczero"
 [profile.release.package.sp1]
 inherits = "sp1"
 
-[profile.release.package.jolt]
-inherits = "jolt"
-
+# [profile.release.package.jolt]
+# inherits = "jolt"

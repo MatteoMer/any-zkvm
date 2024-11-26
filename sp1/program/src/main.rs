@@ -1,7 +1,7 @@
 #![no_main]
 sp1_zkvm::entrypoint!(main);
 
-use lib::{fibonacci, Processor, ZkvmProcessor};
+use lib::{Processor, ZkvmProcessor};
 
 pub fn main() {
     let inputs = Processor::get_guest_inputs().expect("[sp1] error while getting guest inputs");

@@ -26,8 +26,10 @@ This function is the callback you'll get at the end of the program (after verifi
 
 Available zkVM: `[sp1, risczero]`
 
+in progress: `[jolt]`
+
 ## TODO
-- Add more zkVMs
+- Fix Jolt
 - Add Valida with their custom ISA
+- Add more zkVMs
 - Add benchmarks
-- Add an example on how to use a specific zkVM precompile in your program

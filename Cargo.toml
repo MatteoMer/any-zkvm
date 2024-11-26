@@ -10,8 +10,8 @@ members = [
     "risczero/methods",
     "risczero/methods/guest",
     # Jolt
-    "jolt/guest",
-    "jolt/host",
+    # "jolt/guest",
+    # "jolt/host", 
 ]
 
 [workspace.dependencies]
@@ -26,15 +26,16 @@ debug = 1
 [profile.sp1]
 inherits = "release"
 
-[profile.jolt]
-inherits = "release"
-debug = 1
-codegen-units = 1
-lto = "fat"
+# [profile.jolt]
+# inherits = "release"
+# debug = 1
+# codegen-units = 1
+# lto = "fat"
 
 
-# jolt need this, you can delete if you dont plan to use Jolt in your benchmarks
-[patch.crates-io]
-ark-ff = { git = "https://github.com/a16z/arkworks-algebra", branch = "optimize/field-from-u64" }
-ark-ec = { git = "https://github.com/a16z/arkworks-algebra", branch = "optimize/field-from-u64" }
-ark-serialize = { git = "https://github.com/a16z/arkworks-algebra", branch = "optimize/field-from-u64" }
+# removed before jolt is fixed
+#jolt need this, you can delete if you dont plan to use Jolt in your benchmarks
+#[patch.crates-io]
+#ark-ff = { git = "https://github.com/a16z/arkworks-algebra", branch = "optimize/field-from-u64" }
+#ark-ec = { git = "https://github.com/a16z/arkworks-algebra", branch = "optimize/field-from-u64" }
+#ark-serialize = { git = "https://github.com/a16z/arkworks-algebra", branch = "optimize/field-from-u64" }

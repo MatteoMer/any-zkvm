@@ -8,7 +8,13 @@ sp1-zkvm = { version = "3.0.0-rc4", optional = true, default-features = false, f
 sp1-sdk = { version = "3.0.0", optional = true, default-features = false}
 risc0-zkvm = { version = "1.1.2", optional = true, default-features = false, features = ['std'] }
 
+[target.'cfg(all(target_os = "zkvm", target_arch = "riscv32"))'.dependencies]
+powdr-riscv-runtime = { git = "https://github.com/powdr-labs/powdr", tag = "v0.1.2", optional = true, features = [
+  "std",
+] }
+
 [features]
 sp1 = ["sp1-zkvm"]
 sdk-sp1 = ["sp1-sdk"]
 risczero = ["risc0-zkvm"]
+powdr = ["powdr-riscv-runtime"]

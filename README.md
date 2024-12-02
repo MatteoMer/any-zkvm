@@ -24,9 +24,17 @@ This function is the callback you'll get at the end of the program (after verifi
 ## Run a specific zkVM
 `cargo run -p [zkVM] --release`
 
-Available zkVM: `[sp1, risczero]`
+Available zkVMs: `[sp1, risczero, powdrVM]`
 
 in progress: `[jolt]`
+
+## Run a specific zkVM with AVX
+
+Some zkVMs (e.g. powdrVM, Valida) might have a lot better performance with AVX enabled,
+if your hardware supports it.
+
+You can enable it via:
+`RUSTFLAGS='-C target-cpu=native' cargo run -p [zkVM] --release`
 
 ## TODO
 - Fix Jolt

@@ -9,6 +9,8 @@ members = [
     "risczero/host",
     "risczero/methods",
     "risczero/methods/guest",
+    # powdr
+    "powdr",
     # Jolt
     # "jolt/guest",
     # "jolt/host", 
@@ -24,6 +26,9 @@ lto = true
 debug = 1
 
 [profile.sp1]
+inherits = "release"
+
+[profile.powdr]
 inherits = "release"
 
 # [profile.jolt]

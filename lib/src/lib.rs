@@ -47,6 +47,14 @@ pub trait RiscZeroZkvmProcessor {
     fn secp256k1_add(p: *mut [u32; 16], q: *mut [u32; 16]);
 }
 
+#[cfg(feature = "powdr")]
+pub trait PowdrZkvmProcessor {
+    fn process_internal_outputs(receipt: [u32; 8]) -> <Processor as ZkvmProcessor>::Output;
+
+    // for powdr we can use a pre-compile for this function
+    fn secp256k1_add(p: *mut [u32; 16], q: *mut [u32; 16]);
+}
+
 #[derive(Debug)]
 pub struct Processor;
 
@@ -70,6 +78,13 @@ impl ZkvmProcessor for Processor {
                 Ok(risc0_zkvm::guest::env::read::<Self::Input>())
             }
             #[cfg(not(feature = "risczero"))]
+            unreachable!()
+        } else if cfg!(feature = "powdr") {
+            #[cfg(all(feature = "powdr", target_os = "zkvm", target_arch = "riscv32"))]
+            {
+                Ok(powdr_riscv_runtime::io::read::<Self::Input>(0))
+            }
+            #[cfg(not(all(feature = "powdr", target_os = "zkvm", target_arch = "riscv32")))]
             unreachable!()
         } else {
             Err(ZkvmProcessError::NotImplemented)
@@ -116,5 +131,16 @@ impl Sp1ZkvmProcessor for Processor {
 
     fn secp256k1_add(p: *mut [u32; 16], q: *mut [u32; 16]) {
         sp1_zkvm::syscalls::syscall_secp256k1_add(p, q)
+    }
+}
+
+#[cfg(feature = "powdr")]
+impl PowdrZkvmProcessor for Processor {
+    fn process_internal_outputs(_public_values: [u32; 8]) -> <Processor as ZkvmProcessor>::Output {
+        Default::default()
+    }
+
+    fn secp256k1_add(_p: *mut [u32; 16], _q: *mut [u32; 16]) {
+        todo!()
     }
 }

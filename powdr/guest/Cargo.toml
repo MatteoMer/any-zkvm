@@ -1,0 +1,10 @@
+[package]
+name = "guest"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+powdr-riscv-runtime = { git = "https://github.com/powdr-labs/powdr", tag = "v0.1.2", features = ["std"]}
+lib = { path = "../../lib", features = ['powdr'] }
+
+[workspace]

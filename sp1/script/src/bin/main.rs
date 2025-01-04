@@ -18,7 +18,7 @@ fn main() {
     println!("[sp1] Generating proof!");
     // Generate the proof
     let mut proof = client
-        .prove(&pk, stdin)
+        .prove(&pk, &stdin)
         .run()
         .expect("failed to generate proof");
 

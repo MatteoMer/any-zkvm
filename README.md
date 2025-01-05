@@ -6,6 +6,11 @@ For now, proving and verification is in the same script, but it would great to h
 ## Getting started
 You can write your code in `./lib/src/lib.rs`. 
 
+You can install all the available zkvm using the `./build.sh` file
+```shell
+./build.sh
+```
+
 You'll find a trait `Processor` with some function already implemented; let's go through every function and types to understand them better
 
 ### Processor::Input

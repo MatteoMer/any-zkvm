@@ -9,7 +9,7 @@ name = "sp1"
 path = "src/bin/main.rs"
 
 [dependencies]
-sp1-sdk = "4.0.0-rc.1"
+sp1-sdk = "4.0.1"
 serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
 serde = { version = "1.0.200", default-features = false, features = ["derive"] }
 clap = { version = "4.0", features = ["derive", "env"] }
@@ -19,4 +19,4 @@ alloy-sol-types = "0.7.7"
 lib = { workspace = true, features = ['sp1', 'sdk-sp1'] }
 
 [build-dependencies]
-sp1-helper = "3.0.0"
+sp1-helper = "4.0.1"

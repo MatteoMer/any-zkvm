@@ -5,7 +5,7 @@ pub const FIBONACCI_ELF: &[u8] = include_elf!("sp1-program");
 
 fn main() {
     sp1_sdk::utils::setup_logger();
-    let client = ProverClient::new();
+    let client = ProverClient::from_env();
 
     // Setup the inputs.
     let inputs = Processor::get_host_inputs();

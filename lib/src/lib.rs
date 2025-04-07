@@ -92,7 +92,7 @@ impl ZkvmProcessor for Processor {
     }
 
     fn get_host_inputs() -> Self::Input {
-        20
+        3
     }
 
     fn prove(input: Self::Input) -> Result<<Processor as ZkvmProcessor>::Output, ZkvmProcessError> {

@@ -4,5 +4,5 @@ name = "sp1-program"
 edition = "2021"
 
 [dependencies]
-sp1-zkvm = "4.0.1"
+sp1-zkvm = "4.1.7"
 lib = { workspace = true, features = ['sp1'] }
